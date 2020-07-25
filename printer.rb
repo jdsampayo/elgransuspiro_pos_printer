@@ -23,8 +23,9 @@ end
 
 def websocket_connection
   EventMachine.run do
-    uri = "ws://localhost:3000/cable/?uid=navidad"
-    client = ActionCableClient.new(uri, 'PrinterChannel')
+    uri = 'wss://pos.elgransuspiro.com/cable/?uid=branch_name'
+    tls = {cert_chain_file: 'fullchain.pem', private_key_file: 'privkey.pem'}
+    client = ActionCableClient.new(uri, 'PrinterChannel', true, nil, tls)
 
     # called whenever a welcome message is received from the server
     client.connected { puts 'Successfully connected!'.green }
@@ -45,7 +46,7 @@ def websocket_connection
     end
 
     # Sends a message to the server, with the 'action', 'print'
-    # client.perform('print', { message: 'hello from amc' })
+    # client.perform('print', { message: 'hello from printer' })
   end
 end
 
@@ -59,8 +60,6 @@ def logo_escpos
 end
 
 def print(object)
-  #puts "Printing #{object}"
-
   File.open('/dev/usb/lp0', 'w:ascii-8bit') { |f| f.write(object) }
 end
 
