@@ -21,7 +21,7 @@ end
 
 def websocket_connection
   EventMachine.run do
-    uri = 'wss://pos.elgransuspiro.com/cable/?uid=branchname'
+    uri = 'wss://pos.elgransuspiro.com/cable/?uid=branch_name'
     tls = {cert_chain_file: 'fullchain.pem', private_key_file: 'privkey.pem'}
     client = ActionCableClient.new(uri, 'PrinterChannel', true, nil, tls)
 
@@ -59,3 +59,5 @@ end
 def print(object)
   File.open('/dev/usb/lp0', 'w:ascii-8bit') { |f| f.write(object) }
 end
+
+websocket_connection
