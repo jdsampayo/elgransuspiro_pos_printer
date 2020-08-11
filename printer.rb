@@ -1,3 +1,7 @@
+# Log
+#$stdout.reopen('daemon.log', 'a')
+#$stdout.sync = true
+
 begin
   require 'bundler/inline'
 rescue LoadError => e
@@ -15,12 +19,6 @@ gemfile(true) do
   gem 'colorize'
 end
 
-def websocket_restart
-  sleep 5
-  exec 'ruby printer.rb'
-  exit 0
-end
-
 def websocket_connection
   EventMachine.run do
     uri = 'wss://pos.elgransuspiro.com/cable/?uid=branch_name'
@@ -32,8 +30,7 @@ def websocket_connection
 
     # called whenever a disconnection occurs
     client.disconnected do 
-      puts 'Disconnected, restarting...'.red
-      websocket_restart
+      puts 'Disconnected'.red
     end
 
     # called whenever a message is received from the server
