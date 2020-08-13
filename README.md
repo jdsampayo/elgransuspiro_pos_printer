@@ -34,3 +34,7 @@ ExecStart=/usr/bin/ruby printer.rb
 `sudo systemctl start pos_printer`
 
 Accept also: `status/restart/stop`
+
+- Enable the service at boot
+
+`sudo systemctl enable pos_printer`
