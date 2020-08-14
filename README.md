@@ -15,19 +15,9 @@ https://pos.elgransuspiro.com/sucursales?nombre=BRANCH_NAME
 
 ![Ticket printed](https://elgransuspiro.com/pos_printer.png)
 
-- Create service
+- Move service to
 
 `/lib/systemd/system/pos_printer.service`
-
-```
-[Unit]
-Description=POS printer service.
-
-[Service]
-WorkingDirectory=/opt/elgransuspiro_pos_printer
-Restart=always
-ExecStart=/usr/bin/ruby printer.rb
-```
 
 - Start/Check/Restart the service
 

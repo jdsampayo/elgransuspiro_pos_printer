@@ -1,0 +1,12 @@
+#/lib/systemd/system/pos_printer.service
+
+[Unit]
+Description=POS printer service
+
+[Service]
+WorkingDirectory=/opt/elgransuspiro_pos_printer
+Restart=always
+ExecStart=/usr/bin/ruby printer.rb
+
+[Install]
+RequiredBy=multi-user.target
